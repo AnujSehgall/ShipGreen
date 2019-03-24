@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "937621987322",
-    "firebase_url": "https://greenapp-489f2.firebaseio.com",
-    "project_id": "greenapp-489f2",
-    "storage_bucket": "greenapp-489f2.appspot.com"
+    "project_number": "796707739199",
+    "firebase_url": "https://greenapplication-4f493.firebaseio.com",
+    "project_id": "greenapplication-4f493",
+    "storage_bucket": "greenapplication-4f493.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:937621987322:android:1ef3375cee1bb01d",
+        "mobilesdk_app_id": "1:796707739199:android:1ef3375cee1bb01d",
         "android_client_info": {
           "package_name": "com.example.greenapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "937621987322-d6ram4t0pr9ue7q3vi8eqhpe3lb4f2fi.apps.googleusercontent.com",
+          "client_id": "796707739199-78r5071gus11tbh1bo5lbmqssvru6chv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenapp",
+            "certificate_hash": "239f92c3e5fc748fcf31dc25a664c00bb834c7f9"
+          }
+        },
+        {
+          "client_id": "796707739199-bgacc57rvq5t7storubnd1227boo8gbd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4zt4qb1IlglmTKQSU5CgZi1qWkrOlja4"
+          "current_key": "AIzaSyBGozsCmMCDJJf_gdgZk1IyeWpb9JNtICY"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796707739199-bgacc57rvq5t7storubnd1227boo8gbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
