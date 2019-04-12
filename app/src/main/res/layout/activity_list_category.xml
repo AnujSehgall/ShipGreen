@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listview"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListCategory"
+    android:background="@drawable/side_nav_bar">
+    <android.support.v7.widget.CardView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="5dp"
+        android:layout_margin="25dp"
+        android:layout_centerVertical="true"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardBackgroundColor="@color/colorPrimary">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/veggiescard"
+                android:layout_margin="20dp"
+                android:elevation="50dp"
+                app:cardCornerRadius="30dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/veggies"
+                android:background="@drawable/veggies"
+                />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/fruitscard"
+                android:layout_below="@id/veggiescard"
+                android:layout_margin="20dp"
+                android:elevation="50dp"
+                app:cardCornerRadius="30dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fruits"
+                android:background="@drawable/fruit"
+                />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/grainsscard"
+                android:layout_below="@id/fruitscard"
+                android:layout_margin="20dp"
+                android:elevation="50dp"
+                app:cardCornerRadius="30dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/grains"
+                android:background="@drawable/grain"/>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

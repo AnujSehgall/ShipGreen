@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTextBlack">#212121</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorBlueGrey">#263238</color>
+    <color name="QRCodeWhiteColor">#ffffff</color>
+    <color name="QRCodeBlackColor">#000000</color>
+    <color name="colorPurple">#9B26AF</color>
 </resources>
