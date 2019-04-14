@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class ListCategory extends AppCompatActivity {
@@ -23,7 +26,13 @@ public class ListCategory extends AppCompatActivity {
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.listview);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://greenapplication-4f493.appspot.com").child("fruit.jpg");
         veggieImage = (ImageView) findViewById(R.id.veggies);
+        Glide.with(getApplicationContext())
+                .load(storageRef)
+                .into(veggieImage);
+
         //Picasso.get().load(veggieUrl).into(veggieImage);
         veggieImage.setOnClickListener(new View.OnClickListener() {
             @Override

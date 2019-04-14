@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/edittext_stroke"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="30dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/veggies" />
+
+        <EditText
+            android:id="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:hint="Item Name"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemName"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:inputType="numberDecimal"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:hint="Qty"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemName"
+            android:layout_toRightOf="@+id/quantity"
+            android:text="Kg"
+            android:textSize="20dp"
+            android:layout_marginTop="40dp"
+            android:id="@+id/unitOfMeasure"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemName"
+            android:layout_toRightOf="@+id/unitOfMeasure"
+            android:text="x"
+            android:textSize="25dp"
+            android:layout_marginStart="20dp"
+            android:textColor="#FF0000"
+            android:layout_marginTop="35dp"
+            android:id="@+id/multiply"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemName"
+            android:layout_toRightOf="@+id/multiply"
+            android:text="₹"
+            android:textSize="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="35dp"
+            android:id="@+id/rupee"/>
+
+        <EditText
+            android:id="@+id/cost"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemName"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/rupee"
+            android:inputType="numberDecimal"
+            android:hint="Price"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cost"
+            android:text="/Kg"
+            android:textSize="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/itemName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cost"
+            android:layout_toLeftOf="@+id/totalCost"
+            android:text="₹"
+            android:textSize="35dp"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/rupeeCost"
+            android:textColor="#38C638"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/totalCost"
+            android:layout_below="@+id/cost"
+            android:layout_toRightOf="@id/multiply"
+            android:hint="Total"
+            android:textSize="30dp"
+            android:textColor="#38C638"/>
+
+        <Button android:id="@+id/saveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorAccent"
+            android:layout_below="@id/totalCost"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

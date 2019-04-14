@@ -2,10 +2,13 @@ package com.example.greenapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,21 +25,31 @@ import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity
+public  class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public class FirebaseHelper {
@@ -124,6 +137,8 @@ public class HomeActivity extends AppCompatActivity
     class CustomAdapter extends BaseAdapter {
         Context c;
         ArrayList<Content> contents;
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageRef = storage.getReferenceFromUrl("gs://greenapplication-4f493.appspot.com").child("fruit.jpg");
 
         public CustomAdapter(Context c, ArrayList<Content> contents) {
             this.c = c;
@@ -176,7 +191,9 @@ public class HomeActivity extends AppCompatActivity
     FirebaseHelper helper;
     CustomAdapter adapter;
     ListView mListView;
-    EditText nameEditTxt, quoteEditText, descriptionEditText;
+    EditText name, costQt, qty;
+    TextView tCost;
+    private String currentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,8 +211,11 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListView.smoothScrollToPosition(4);
-                displayInputDialog();
+                final Dialog dialog = new Dialog(getApplicationContext());
+                dialog.setContentView(R.layout.inputitem);
+               // mListView.smoothScrollToPosition(0);
+                //displayInputDialog();
+                //displayNewInputDialog();
             }
         });
 
@@ -207,9 +227,16 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Toast.makeText(getApplicationContext(),currentuser,Toast.LENGTH_SHORT).show();
+
+        SharedPreferences.Editor editor = getSharedPreferences("CurrentUserId", MODE_PRIVATE).edit();
+        editor.putString("userId", currentuser);
+        editor.apply();
     }
 
-    private void displayInputDialog() {
+   /* private void displayInputDialog() {
         //create input dialog
         Dialog d = new Dialog(this);
         d.setTitle("Save To Firebase");
@@ -260,6 +287,65 @@ public class HomeActivity extends AppCompatActivity
 
         d.show();
     }
+*/
+
+    private void displayNewInputDialog() {
+        //create input dialog
+        Dialog d = new Dialog(this);
+        d.setTitle("Save To Firebase");
+        d.setContentView(R.layout.inputitem);
+
+        //find widgets
+        name = d.findViewById(R.id.itemName);
+        qty = d.findViewById(R.id.quantity);
+        costQt = d.findViewById(R.id.cost);
+        tCost = d.findViewById(R.id.totalCost);
+        Button saveBtn = d.findViewById(R.id.saveBtn);
+
+        //get data from edittexts
+//        final String itemName = name.getText().toString();
+//        float quantity = Float.valueOf(qty.getText().toString());
+//        float cost = Float.valueOf(costQt.getText().toString());
+
+//        if ( itemName!= null && quantity > 0.0 && cost > 0.0 ){
+//            String totalCost = String.valueOf((quantity*cost));
+//            tCost.setText(totalCost);
+//        }
+
+        //save button clicked
+        /*saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //set data to POJO
+                Content s = new Content();
+                s.setName(itemName);
+                s.setPropellant(quote);
+                s.setDescription(description);
+
+                //perform simple validation
+                if (name != null && name.length() > 0) {
+                    //save data to firebase
+                    if (helper.save(s)) {
+                        //clear edittexts
+                        nameEditTxt.setText("");
+                        quoteEditText.setText("");
+                        descriptionEditText.setText("");
+
+                        //refresh listview
+                        ArrayList<Content> fetchedData = helper.retrieve();
+                        adapter = new CustomAdapter(HomeActivity.this, fetchedData);
+                        mListView.setAdapter(adapter);
+                        mListView.smoothScrollToPosition(fetchedData.size());
+                    }
+                } else {
+                    Toast.makeText(HomeActivity.this, "Name Must Not Be Empty Please", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+
+        d.show();
+    }
 
     @Override
     public void onBackPressed() {
@@ -286,8 +372,13 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            SharedPreferences settings = getApplicationContext().getSharedPreferences("CurrentUserId", Context.MODE_PRIVATE);
+            settings.edit().remove("userId").commit();
+            Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
